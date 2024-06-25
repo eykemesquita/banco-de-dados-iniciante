@@ -25,3 +25,4 @@ src/ejudge_server/__meta__.py
 
 # Testing and temporary files
 .tox/
+
