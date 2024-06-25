@@ -33,7 +33,7 @@ Este repositório contém o esquema SQL e exemplos de consultas para um sistema 
 ## Scripts SQL
 
 ### Criação das Tabelas
-```sh
+```sql
 CREATE TABLE professor (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL
@@ -63,7 +63,7 @@ CREATE TABLE aluno_curso (
 ```
 
 ### Inserção de Dados
-```sh
+```sql
 INSERT INTO professor (nome) VALUES ('Professor A'), ('Professor B');
 
 INSERT INTO curso (nome, id_professor) VALUES ('Inglês Básico', 1), ('Inglês Avançado', 2);
@@ -83,14 +83,14 @@ INSERT INTO aluno_curso (id_aluno, id_curso) VALUES
 
 ### Consultas de Exemplo
 *Liste os nomes dos alunos que fizeram matrícula em Janeiro de 2024*
-```sh
+```sql
 SELECT nome 
 FROM aluno 
 WHERE data_matricula BETWEEN '2024-01-01' AND '2024-01-31';
 ```
 
 *Liste os nomes dos cursos de um determinado professor*
-```sh
+```sql
 SELECT c.nome 
 FROM curso c 
 JOIN professor p ON c.id_professor = p.id 
@@ -98,7 +98,7 @@ WHERE p.nome = 'Professor A';
 ```
 
 *Liste os nomes dos alunos de um determinado curso*
-```sh
+```sql
 SELECT a.nome 
 FROM aluno a 
 JOIN aluno_curso ac ON a.id = ac.id_aluno 
@@ -110,7 +110,7 @@ WHERE c.nome = 'Inglês Básico';
 
 *Adicionar colunas extras*
 
-```sh
+```sql
 ALTER TABLE aluno ADD email VARCHAR(100);
 
 ALTER TABLE curso ADD descricao TEXT;
@@ -118,7 +118,7 @@ ALTER TABLE curso ADD descricao TEXT;
 
 *Criação de Índices*
 
-```sh
+```sql
 CREATE INDEX idx_aluno_nome ON aluno(nome);
 CREATE INDEX idx_curso_nome ON curso(nome);
 ```
@@ -127,7 +127,7 @@ CREATE INDEX idx_curso_nome ON curso(nome);
 
 *Total recebido por dia de matrícula*
 
-```sh
+```sql
 SELECT data_matricula, SUM(valor_pago) AS total_recebido 
 FROM aluno 
 GROUP BY data_matricula;
@@ -137,7 +137,7 @@ GROUP BY data_matricula;
 
 *Liste os nomes dos alunos que já fizeram pelo menos um curso*
 
-```sh
+```sql
 SELECT nome 
 FROM aluno 
 WHERE id IN (SELECT DISTINCT id_aluno FROM aluno_curso);
